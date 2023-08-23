@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <title>Frontend Mentor | [Challenge Name Here]</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; margin-top: 2rem;}
+    .attribution a { color: hsl(228, 45%, 44%); }
+
+    :root {
+      /* TEXT-COLORS */
+
+      --APP-HEADER-CLR: hsl(276, 100%, 81%);
+      --CHAT-FNT-VIOLET: hsl(276, 55%, 52%);
+      --CHAT-FNT-LITE-VIOLET: hsl(271, 15%, 43%);
+      --PH-TXT-XLR: hsl(206, 6%, 79%);
+      --MAIN-HEADER: hsl(271, 36%, 24%);
+      --MAIN-TEXT: hsl(270, 7%, 64%);
+
+      /* GRADIENT */
+
+      --GRD-MAGENTA: hsl(293, 100%, 63%);
+      --GRD-VIOLET: hsl(264, 100%, 61%);
+
+      /* SECONDARY COLORS */
+
+      --WHITE:  hsl(0, 0%, 100%);
+      --APP-BG-CLR: hsl(270, 20%, 96%);
+      --APP-BTN: hsl(271, 36%, 24%);
+      --BTN-OUTLINE: hsl(289, 100%, 72%);
+
+      /* FONT-SIZE */
+      --FS-APP-HEAD: 0.675rem;
+      --FS-APP-CHAT: 0.5rem
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: 'Rubik', sans-serif;
+      font-size: 16px;
+    }
+
+    body {
+      min-height: 100vh;
+      width: 100%;
+      background-color: var(--APP-BG-CLR);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding-top: 3rem;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+    /* BACKGROUND ICON */
+    .bg-icon {
+      width: 50%;
+      height: 50vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      border-bottom-right-radius: 250px;
+      background: linear-gradient(to bottom left, var(--GRD-MAGENTA), var(--GRD-VIOLET) 120%);
+      z-index: -1;
+    }
+
+    .hero-app {
+      font-size: var(--FS-APP-CHAT);
+      height: 526px;
+      width:250px;
+      background-color: var(--WHITE);
+      border-radius: 1.7rem;
+      padding: 1.15em;
+      position: relative;
+      margin: 0 auto;
+      box-shadow: 2px 2px 10px hsla(276, 21%, 45%, 0.318);
+    }
+
+    .app-basel {
+      height: 2.9em;
+      background-color: var(--WHITE);
+      border-radius: inherit;
+      width: 50%;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+    }
+
+    .app-interface {
+      background: var(--APP-BG-CLR);
+      position: relative;
+      padding-top: 7.35em;
+      border-top-right-radius: 2.5em;
+      border-top-left-radius: 2.5em;
+      border-bottom-left-radius: 2.5em;
+      border-bottom-right-radius: 2.5em;
+    }
+
+    .app-header {
+      background: linear-gradient(90deg, var(--GRD-VIOLET), var(--GRD-MAGENTA));
+      border-top-right-radius: 2.5em;
+      border-top-left-radius: 2.5em;
+      border-bottom-left-radius: 0.5em;
+      border-bottom-right-radius: 0.5em ;
+      padding-top: 2em;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+    }
+
+    .header-profile {
+      padding: 0 1em;
+      display: flex;
+      gap: 0.5em;
+      align-items: center;
+    }
+
+    .header-flex {
+      display: flex;
+      padding: 1.2em;
+      width: 100%;
+      gap: 7em;
+      align-items: center;
+    }
+
+    /* || ARROW BUTTON-ICON */
+
+    .arrow {
+      border: solid var(--WHITE);
+      display: inline-block;
+      border-width: 0 0.3em 0.3em 0;
+      padding: 0.3em;
+      /* transform: skewX(50deg); */
+    }
+
+    .left {
+      transform: rotate(135deg);
+    }
+
+    /* || OPTIONS ICON */
+
+    .options {
+      color: var(--APP-HEADER-CLR);
+    }
+
+    .dot {
+      display: inline-block;
+      border: solid var(--WHITE);
+      border-width: 0.2em;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .dot:before {
+      content:'';
+      display: inline-block;
+      border: solid var(--WHITE);
+      border-width: 0.2em;
+      border-radius: 50%;
+      position: absolute;
+      top: 0.4em;
+      transform: translateX(-50%);
+    }
+
+    .dot::after {
+      content:'';
+      display: inline-block;
+      border: solid var(--WHITE);
+      border-width: 0.2em;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 0.4em;
+      transform: translateX(-50%)
+    }
+
+    /* PROFILE DISPLAY */
+    .profile-head {
+      color: var(--WHITE);
+    }
+
+    .profile-name {
+      font-size: var(--FS-APP-HEAD);
+      font-weight: 500;
+    }
+
+    .profile-status {
+      color: var(--APP-HEADER-CLR)
+    }
+
+    .profile-img {
+      border: 1px solid var(--WHITE);
+      border-radius: 50%;
+      display: block;
+      width: 3em;
+      height: auto;
+    }
+
+    /* ||CHAT BOX */
+    .chat-box {
+      padding: 1em;
+    }
+
+    .chats {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      margin-bottom: 2em;
+    }
+
+    .chat {
+      padding: 0.8em;
+      border-radius: 1em;
+      min-width: 10ch;
+      max-width: 25ch;
+      line-height: 1.5em;
+      font-weight: 500;
+    }
+
+    .receiver {
+      align-self: start;
+      background-color: hsla(271, 15%, 43%, 0.063);
+      color: var(--CHAT-FNT-VIOLET);
+      border-bottom-left-radius: 0.3em;
+    }
+
+    .sender {
+      align-self: end;
+      background-color: var(--WHITE);
+      color: var(--CHAT-FNT-LITE-VIOLET);
+      border-bottom-right-radius: 0.3em;
+    }
+
+    .sent-pictures {
+      display: flex;
+      gap: 1em;
+      width: 100%;
+      justify-content: flex-end;
+    }
+
+    .dog-img {
+      display: block;
+      width: 5em;
+      border-radius: 1em;
+    }
+
+    /* PRICE-BOX */
+
+    .price-box {
+      background: linear-gradient(to right, var(--GRD-MAGENTA), var(--GRD-VIOLET));
+      display: flex;
+      min-width: 75%;
+      color: var(--APP-HEADER-CLR);
+      justify-content: space-between;
+      padding-right: 1em;
+      align-items: center;
+      height: 4em;
+    }
+
+    .price-service {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+    }
+
+    .circle {
+      display: block;
+      border: solid var(--WHITE);
+      border-width: 0.1em;
+      border-radius: 50%;
+      width: 1.5em;
+      height: 1.5em;
+      padding: 0.3em;
+      opacity: 0.3;
+    }
+
+    .price {
+      font-size: var(--FS-APP-HEAD);
+      font-weight: 700;
+      align-self: center;
+      color: var(--WHITE);
+      opacity: 0.87;
+      vertical-align: middle;
+    }
+
+    /* TYPE BOX */
+
+    .type-box {
+      background-color: var(--WHITE);
+      display: flex;
+      height: 4em;
+      padding: 1em;
+      outline-style: none;
+      outline-width: 0;
+      border-radius: 2em;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    input[type=text] {
+      border-style: none;
+      font-size: var(--FS-APP-CHAT);
+      color: var(--PH-TXT-XLR);
+      align-self: end;
+    }
+
+    .type-btn {
+      background: var(--APP-BTN);
+      border-style: none;
+      border-radius: 50%;
+      width: 1.6em;
+      height: 1.6em;
+    }
+
+    .btn-arrow {
+      border: solid var(--WHITE);
+      display: inline-block;
+      border-width: 0 0.15em 0.15em 0;
+      padding: 0.2em;
+    }
+
+    .right {
+      transform: rotate(-45deg);
+    }
+
+    /* || MAIN SECTION */
+
+    .hero-words {
+      margin-top: 3.5rem;
+      text-align: center;
+    }
+
+    .hero-heading {
+      font-size: 2.4rem;
+      margin-bottom: 1.4rem;
+      font-weight: 700;
+      color: var(--APP-BTN);
+    }
+
+    .hero-text {
+      color: var(--MAIN-TEXT);
+      line-height: 1.5rem;
+      width: 30ch;
+      margin: 0 auto;
+    }
+
+    /* || LARGE SCREENS */
+
+    @media (min-width: 1440px) {
+
+      .bg-icon {
+        border-bottom-left-radius:350px;
+        border-bottom-right-radius: 350px;
+        width: 460px;
+        height: 95%;
+        left:-70px;
+      }
+
+      .bg-icon::after {
+        content: '';
+        width: 460px;
+        height: 95%;
+        bottom: 0;
+        right: -120px;
+        position: fixed;
+        background: linear-gradient(to bottom left, var(--GRD-MAGENTA), var(--GRD-VIOLET) 120%);
+        border-top-left-radius:350px;
+        border-top-right-radius: 350px;
+        opacity: 0.05;
+      }
+      .container {
+        display: flex;
+        justify-content: space-evenly;
+/*         border: 1px solid red; */
+        width: 75%;
+        align-items: center;
+      }
+
+      .hero-words {
+        width: 50%;
+        text-align: left;
+        margin-top: 0;
+      }
+
+      .hero-text {
+        width: 48ch;
+        margin: 0;
+      }
+    }
+
+  </style>
+</head>
+<body>
+    <div class="bg-icon"></div>
+
+  <div class="container">
+
+    <div class="hero-app">
+          <div class="app-basel"></div>
+
+          <div class="app-interface">
+            <div class="app-header">
+              <div class="header-flex">
+                <div class="header-profile">
+                  <p><i class="arrow left"></i></p>
+                  <img src="./images/avatar.jpg" alt="profile picture" class="profile-img">
+                  <div class="profile-head">
+                    <p class="profile-name">Samuel Green</p>
+                    <p class="profile-status">Available to Walk</p>
+                  </div>
+                </div>
+                <p class="options"><i class="dot"></i></p>
+              </div>
+            </div>
+
+            <div class="chat-box">
+              <div class="chats">
+                <p class="chat receiver">That sounds great. I’d be happy with that.</p>
+                <p class="chat receiver">Could you send over some pictures of your dog, please?</p>
+              </div>
+
+              <div class="chats">
+                <div class="sent-pictures">
+                  <img src="./images/dog-image-1.jpg" alt="dog" class="dog-img">
+                  <img src="./images/dog-image-2.jpg" alt="dog" class="dog-img">
+                  <img src="./images/dog-image-3.jpg" alt="dog" class="dog-img">
+                </div>
+                <p class="chat sender">Here are a few pictures. She’s a happy girl!</p>
+                <p class="chat sender">Can you make it?</p>
+              </div>
+
+              <div class="chats">
+                <p class="chat receiver">She looks so happy! The time we discussed works. How long shall I take her out for?</p>
+
+                <div class="chat receiver price-box">
+                  <div class="price-service">
+                    <p><i class="circle"></i></p>
+                    <p>30 minute walk</p>
+                  </div>
+                  <p class="price">$29</p>
+                </div>
+
+                <div class="chat receiver price-box">
+                  <div class="price-service">
+                    <p><i class="circle"></i></p>
+                    <p>1 hour walk</p>
+                  </div>
+                  <p class="price">$49</p>
+                </div>
+              </div>
+
+              <form class="type-box">
+                <input type="text" placeholder="Text a message…">
+                <button class="type-btn"><i class="btn-arrow right"></i></button>
+              </form>
+            </div>
+          </div>
+    </div>
+
+
+    <!-- \\ MAIN CONTENT -->
+    <div class="hero-words">
+      <h1 class="hero-heading">Simple booking</h1>
+      <p class="hero-text">  Stay in touch with our dog walkers through the chat interface. This makes it easy to 
+        discuss arrangements and make bookings. Once the walk has been completed you can rate 
+        your walker and book again all through the chat.
+      </p>
+    </div>
+  </div>
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Tabe Success (Tabebash)</a>.
+  </div>
+</body>
+</html>
